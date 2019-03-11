@@ -1,24 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>タイトル:</strong>
   <%= @task.title %>
 </p>
 
 <p>
-  <strong>Memo:</strong>
+  <strong>メモ:</strong>
   <%= @task.memo %>
 </p>
 
 <p>
-  <strong>Is display:</strong>
-  <%= @task.is_display %>
+  <strong>状態:</strong>
+  <% if @task.status == "draft" %>
+    draft
+  <% elsif @task.status == "published" %>
+    published
+  <% elsif @task.status == "archieved" %>
+    archived
+  <% end %>
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @task.status %>
+  <strong>登録日:</strong>
+  <%= @task.created_at.strftime("%Y年%m月%d日") %>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to '一覧', tasks_path %> <%= link_to '編集', edit_task_path(@task) %> <%= link_to '削除', task_path, method: :delete, data: {confirm: "削除しますか？"} %>

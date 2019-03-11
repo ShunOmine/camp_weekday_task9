@@ -31,3 +31,12 @@ Task.create(
     created_at: '2019-02-07',
     updated_at: '2019-02-07'
 )
+
+Task.create(
+    title: 'is_displayテスト',
+    memo: 'is_displyテストを行う。テスト、テスト、テスト',
+    is_display: false,
+    status: 0,
+    created_at: '2019-02-10',
+    updated_at: '2019-02-10'
+)

@@ -1,33 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<h1>タスク一覧</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Memo</th>
-      <th>Is display</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @tasks.each do |t| %>
+  <% if t.is_display == true %>
+    <p>
+      <% if t.status == "draft" %>
+        <%= link_to t.title, t, style: "color: #FF0000" %> <%= t.created_at.strftime("%Y年%m月%d日") %>
+      <% elsif t.status == "published" %>
+        <%= link_to t.title, t, style: "color: #0000FF" %> <%= t.created_at.strftime("%Y年%m月%d日") %>
+      <% elsif t.status == "archieved" %>
+        <%= link_to t.title, t, style: "color: #008000" %> <%= t.created_at.strftime("%Y年%m月%d日") %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.memo %></td>
-        <td><%= task.is_display %></td>
-        <td><%= task.status %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Task', new_task_path %>
+<%= link_to '出品する', new_task_path %> <%= link_to '非表示一覧', hide_tasks_path %>
